@@ -15,11 +15,11 @@
  */
 package io.gatling.http.action
 
-import com.ning.http.client.cookie.Cookie
+import org.asynchttpclient.cookie.Cookie
 
 import akka.actor.ActorDSL.actor
 import akka.actor.ActorRef
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import io.gatling.core.action.SessionHook
 import io.gatling.core.config.Protocols
 import io.gatling.core.session.{ Expression, Session }

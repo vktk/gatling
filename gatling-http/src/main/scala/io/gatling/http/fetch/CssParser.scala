@@ -15,7 +15,7 @@
  */
 package io.gatling.http.fetch
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 
 import scala.annotation.{ switch, tailrec }
 import scala.collection.TraversableOnce.flattenTraversableOnce

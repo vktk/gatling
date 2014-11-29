@@ -15,8 +15,8 @@
  */
 package io.gatling.http
 
-import com.ning.http.client.ProxyServer
-import com.ning.http.client.ProxyServer.Protocol
+import org.asynchttpclient.ProxyServer
+import org.asynchttpclient.ProxyServer.Protocol
 
 import io.gatling.http.config.Proxy
 

@@ -20,9 +20,9 @@ import java.util.regex.Pattern
 
 import scala.collection.mutable
 
-import com.ning.http.client._
-import com.ning.http.client.providers.netty.NettyAsyncHttpProvider
-import com.ning.http.client.providers.netty.channel.pool.ChannelPoolPartitionSelector
+import org.asynchttpclient._
+import org.asynchttpclient.providers.netty.commons.channel.pool.ChannelPoolPartitionSelector
+import org.asynchttpclient.providers.netty4.NettyAsyncHttpProvider
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.akka.GatlingActorSystem

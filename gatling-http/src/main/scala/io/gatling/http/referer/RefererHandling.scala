@@ -15,7 +15,7 @@
  */
 package io.gatling.http.referer
 
-import com.ning.http.client.Request
+import org.asynchttpclient.Request
 
 import io.gatling.core.session.{ Session, SessionPrivateAttributes }
 import io.gatling.http.config.HttpProtocol

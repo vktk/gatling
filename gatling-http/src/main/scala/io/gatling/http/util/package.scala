@@ -18,12 +18,12 @@ package io.gatling.http
 import java.lang.{ StringBuilder => JStringBuilder }
 import java.util.{ List => JList, Map => JMap }
 
-import com.ning.http.client.providers.netty.request.NettyRequest
+import org.asynchttpclient.providers.netty4.request.NettyRequest
 
 import scala.collection.JavaConversions._
 
-import com.ning.http.client.{ Param, Request }
-import com.ning.http.client.multipart._
+import org.asynchttpclient.{ Param, Request }
+import org.asynchttpclient.multipart._
 
 import io.gatling.core.util.StringHelper.Eol
 import io.gatling.http.response.Response

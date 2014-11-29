@@ -30,7 +30,7 @@ import io.gatling.http.request.builder.ws.Ws
 
 object Predef extends HttpCheckSupport with WsCheckSupport with SitemapFeederSupport {
 
-  type Request = com.ning.http.client.Request
+  type Request = org.asynchttpclient.Request
   type Response = io.gatling.http.response.Response
 
   def http = HttpProtocolBuilder.DefaultHttpProtocolBuilder

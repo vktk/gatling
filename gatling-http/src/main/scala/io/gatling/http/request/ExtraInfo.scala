@@ -15,7 +15,7 @@
  */
 package io.gatling.http.request
 
-import com.ning.http.client.Request
+import org.asynchttpclient.Request
 import io.gatling.core.result.message.Status
 import io.gatling.core.session.Session
 import io.gatling.http.response.Response

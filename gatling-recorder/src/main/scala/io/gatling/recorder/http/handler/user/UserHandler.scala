@@ -17,8 +17,8 @@ package io.gatling.recorder.http.handler.user
 
 import java.net.InetSocketAddress
 
-import com.ning.http.client.uri.Uri
-import com.ning.http.util.Base64
+import org.asynchttpclient.uri.Uri
+import org.asynchttpclient.util.Base64
 import com.typesafe.scalalogging.StrictLogging
 import io.gatling.http.HeaderNames
 import io.gatling.recorder.controller.RecorderController

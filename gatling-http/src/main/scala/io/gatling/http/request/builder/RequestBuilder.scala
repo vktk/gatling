@@ -17,8 +17,8 @@ package io.gatling.http.request.builder
 
 import java.net.InetAddress
 
-import com.ning.http.client._
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient._
+import org.asynchttpclient.uri.Uri
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.session._

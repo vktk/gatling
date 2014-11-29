@@ -17,8 +17,8 @@ package io.gatling.http.ahc
 
 import java.lang.{ StringBuilder => JStringBuilder }
 
-import com.ning.http.client.uri.Uri
-import com.ning.http.client.{ Request, RequestBuilder }
+import org.asynchttpclient.uri.Uri
+import org.asynchttpclient.{ Request, RequestBuilder }
 import akka.actor.{ ActorRef, Props }
 import akka.actor.ActorDSL.actor
 import akka.routing.RoundRobinPool
@@ -219,7 +219,7 @@ class AsyncHandlerActor extends BaseActor with DataWriterClient {
         val requestBuilder = new RequestBuilder("GET")
           .setUri(redirectUri)
           .setBodyEncoding(configuration.core.encoding)
-          .setConnectionPoolKeyStrategy(originalRequest.getConnectionPoolPartitioning)
+          .setConnectionPoolPartitioning(originalRequest.getConnectionPoolPartitioning)
           .setInetAddress(originalRequest.getInetAddress)
           .setLocalInetAddress(originalRequest.getLocalAddress)
           .setVirtualHost(originalRequest.getVirtualHost)

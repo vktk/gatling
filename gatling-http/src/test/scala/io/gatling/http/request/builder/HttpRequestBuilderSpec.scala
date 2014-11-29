@@ -17,8 +17,8 @@ package io.gatling.http.request.builder
 
 import org.scalatest.{ FlatSpec, Matchers }
 
-import com.ning.http.client.uri.Uri
-import com.ning.http.client.{ Request, RequestBuilderBase, SignatureCalculator }
+import org.asynchttpclient.uri.Uri
+import org.asynchttpclient.{ Request, RequestBuilderBase, SignatureCalculator }
 
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session._

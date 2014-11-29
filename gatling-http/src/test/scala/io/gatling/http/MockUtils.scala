@@ -18,8 +18,8 @@ package io.gatling.http
 import org.mockito.Mockito._
 import org.scalatest.mock.MockitoSugar
 
-import com.ning.http.client.Request
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.Request
+import org.asynchttpclient.uri.Uri
 
 import io.gatling.core.session.Session
 import io.gatling.http.ahc.HttpTx

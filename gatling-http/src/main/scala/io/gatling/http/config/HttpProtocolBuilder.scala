@@ -17,7 +17,7 @@ package io.gatling.http.config
 
 import java.net.InetAddress
 
-import com.ning.http.client.{ RequestBuilderBase, Request, SignatureCalculator, Realm }
+import org.asynchttpclient.{ RequestBuilderBase, Request, SignatureCalculator, Realm }
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.filter.{ BlackList, Filters, WhiteList }

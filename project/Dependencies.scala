@@ -13,8 +13,9 @@ object Dependencies {
   private val scalaSwing                     = "org.scala-lang.modules"                %% "scala-swing"                 % "1.0.1"
   private val scalaXml                       = "org.scala-lang.modules"                %% "scala-xml"                   % "1.0.2"
   private val scalaParserCombinators         = "org.scala-lang.modules"                %% "scala-parser-combinators"    % "1.0.2"
-  private val ahc                            = "com.ning"                               % "async-http-client"           % "1.9.0-BETA24"
-  private val netty                          = "io.netty"                               % "netty"                       % "3.9.5.Final"
+  private val ahc                            = "org.asynchttpclient"                    % "async-http-client-netty4-provider"           % "2.0.0-SNAPSHOT"
+  private val netty3                         = "io.netty"                               % "netty"                       % "3.9.5.Final"
+  private val netty4                         = "io.netty"                               % "netty-all"                   % "4.0.24.Final"
   private val akkaActor                      = "com.typesafe.akka"                     %% "akka-actor"                  % akkaVersion
   private val config                         = "com.typesafe"                           % "config"                      % "1.2.1"
   private val saxon                          = "net.sf.saxon"                           % "Saxon-HE"                    % "9.6.0-2"
@@ -66,7 +67,7 @@ object Dependencies {
 
   val redisDependencies = redisClient +: testDeps
 
-  val httpDependencies = Seq(ahc, netty, jzlib, scalaXml) ++ testDeps :+ sprayCan
+  val httpDependencies = Seq(ahc, netty4, jzlib, scalaXml) ++ testDeps :+ sprayCan
 
   val jmsDependencies = Seq(jmsApi, lru) ++ testDeps :+ activemqCore
 
@@ -81,5 +82,5 @@ object Dependencies {
   def compilerDependencies(scalaVersion: String) =
     Seq(scalaLibrary(scalaVersion), scalaReflect(scalaVersion), config, slf4jApi, logbackClassic, zinc)
 
-  def recorderDependencies = Seq(scalaSwing, scopt, jackson, bouncycastle) ++ testDeps
+  def recorderDependencies = Seq(scalaSwing, scopt, jackson, bouncycastle, netty3) ++ testDeps
 }

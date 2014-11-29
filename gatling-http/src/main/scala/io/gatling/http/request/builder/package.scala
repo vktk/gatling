@@ -18,7 +18,7 @@ package io.gatling.http.request
 import scala.annotation.tailrec
 import scala.collection.breakOut
 
-import com.ning.http.client.Param
+import org.asynchttpclient.Param
 
 import io.gatling.core.session.Session
 import io.gatling.core.validation._

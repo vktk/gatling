@@ -18,7 +18,7 @@ package io.gatling.recorder.controller
 import java.nio.file.Path
 import java.util.concurrent.ConcurrentLinkedQueue
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import io.gatling.recorder.http.handler.remote.TimedHttpRequest
 
 import scala.collection.JavaConversions._
@@ -28,7 +28,7 @@ import scala.concurrent.duration.DurationLong
 import org.jboss.netty.handler.codec.http.{ HttpRequest, HttpResponse }
 import org.jboss.netty.handler.codec.http.HttpHeaders.Names.PROXY_AUTHORIZATION
 
-import com.ning.http.util.Base64
+import org.asynchttpclient.util.Base64
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.validation.{ Failure, Success }

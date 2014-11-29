@@ -15,8 +15,8 @@
  */
 package io.gatling.http.fetch
 
-import com.ning.http.client.Request
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.Request
+import org.asynchttpclient.uri.Uri
 import io.gatling.http.request._
 import io.gatling.http.util.HttpHelper._
 

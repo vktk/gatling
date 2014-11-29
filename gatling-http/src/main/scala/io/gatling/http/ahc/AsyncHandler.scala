@@ -17,10 +17,10 @@ package io.gatling.http.ahc
 
 import java.util.concurrent.atomic.AtomicBoolean
 
-import com.ning.http.client.providers.netty.request.NettyRequest
-import com.ning.http.client.{ AsyncHandlerExtensions, HttpResponseBodyPart, HttpResponseHeaders, HttpResponseStatus, ProgressAsyncHandler }
-import com.ning.http.client.AsyncHandler.STATE
-import com.ning.http.client.AsyncHandler.STATE.CONTINUE
+import org.asynchttpclient.providers.netty4.request.NettyRequest
+import org.asynchttpclient.{ AsyncHandlerExtensions, HttpResponseBodyPart, HttpResponseHeaders, HttpResponseStatus, ProgressAsyncHandler }
+import org.asynchttpclient.AsyncHandler.STATE
+import org.asynchttpclient.AsyncHandler.STATE.CONTINUE
 import com.typesafe.scalalogging.StrictLogging
 
 /**

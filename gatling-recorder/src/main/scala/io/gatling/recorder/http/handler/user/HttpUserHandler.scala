@@ -17,7 +17,7 @@ package io.gatling.recorder.http.handler.user
 
 import java.net.InetSocketAddress
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import io.gatling.recorder.http.HttpProxy
 import io.gatling.recorder.http.handler.ScalaChannelHandler
 import org.jboss.netty.channel.{ Channel, ChannelFuture }

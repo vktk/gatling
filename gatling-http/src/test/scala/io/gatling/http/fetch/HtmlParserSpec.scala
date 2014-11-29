@@ -19,7 +19,7 @@ import scala.io.Codec.UTF8
 
 import org.scalatest.{ FlatSpec, Matchers }
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 
 import io.gatling.core.util.IO._
 

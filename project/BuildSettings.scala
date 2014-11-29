@@ -18,7 +18,7 @@ object BuildSettings {
     scalaVersion          := "2.11.4",
     autoScalaLibrary      := false,
     updateOptions         := updateOptions.value.withCachedResolution(true),
-    resolvers             := Seq(Resolver.mavenLocal, Opts.resolver.sonatypeSnapshots),
+    resolvers             := Seq(Resolver.mavenLocal),
     javacOptions          := Seq("-Xlint:-options","-source", "1.7", "-target", "1.7"),
     scalacOptions         := Seq(
       "-encoding", "UTF-8",

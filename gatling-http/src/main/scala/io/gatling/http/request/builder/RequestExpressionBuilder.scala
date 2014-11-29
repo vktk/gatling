@@ -15,8 +15,8 @@
  */
 package io.gatling.http.request.builder
 
-import com.ning.http.client.uri.Uri
-import com.ning.http.client.{ Request, RequestBuilder => AHCRequestBuilder }
+import org.asynchttpclient.{ Request, RequestBuilder => AHCRequestBuilder }
+import org.asynchttpclient.uri.Uri
 import com.typesafe.scalalogging.StrictLogging
 import io.gatling.core.config.GatlingConfiguration.configuration
 import io.gatling.core.session.{ Expression, Session }
@@ -124,7 +124,7 @@ abstract class RequestExpressionBuilder(commonAttributes: CommonAttributes, prot
       requestBuilder.setBodyEncoding(configuration.core.encoding)
 
       if (!protocol.enginePart.shareConnections)
-        requestBuilder.setConnectionPoolKeyStrategy(new ChannelPoolPartitioning(session))
+        requestBuilder.setConnectionPoolPartitioning(new ChannelPoolPartitioning(session))
 
       protocol.enginePart.localAddress.foreach(requestBuilder.setLocalInetAddress)
 

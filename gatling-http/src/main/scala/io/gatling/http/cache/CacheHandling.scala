@@ -15,9 +15,9 @@
  */
 package io.gatling.http.cache
 
-import com.ning.http.client.Request
-import com.ning.http.client.date.RFC2616DateParser
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.Request
+import org.asynchttpclient.date.RFC2616DateParser
+import org.asynchttpclient.uri.Uri
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.config.GatlingConfiguration._

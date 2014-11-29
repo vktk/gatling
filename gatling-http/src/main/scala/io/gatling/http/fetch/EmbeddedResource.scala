@@ -15,7 +15,7 @@
  */
 package io.gatling.http.fetch
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import io.gatling.core.session._
 import io.gatling.core.validation.Validation
 import io.gatling.http.HeaderNames

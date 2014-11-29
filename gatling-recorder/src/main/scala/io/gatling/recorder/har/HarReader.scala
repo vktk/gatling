@@ -18,7 +18,7 @@ package io.gatling.recorder.har
 import java.io.{ FileInputStream, InputStream }
 import java.net.URL
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 
 import scala.collection.breakOut
 import scala.util.Try

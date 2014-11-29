@@ -15,7 +15,7 @@
  */
 package io.gatling.http.request.builder
 
-import com.ning.http.client.Request
+import org.asynchttpclient.Request
 
 import io.gatling.core.session._
 import io.gatling.http.{ HeaderValues, HeaderNames }

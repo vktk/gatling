@@ -15,8 +15,8 @@
  */
 package io.gatling.http.cookie
 
-import com.ning.http.client.cookie.Cookie
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.cookie.Cookie
+import org.asynchttpclient.uri.Uri
 import io.gatling.core.session.{ Session, SessionPrivateAttributes }
 import io.gatling.core.validation.SuccessWrapper
 import io.gatling.core.session.Expression

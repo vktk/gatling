@@ -19,9 +19,9 @@ import java.io.{ ByteArrayInputStream, InputStream }
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets._
 
-import scala.annotation.switch
+import io.netty.buffer.{ ByteBufInputStream, Unpooled, ByteBuf }
 
-import org.jboss.netty.buffer.{ ChannelBuffer, ChannelBufferInputStream, ChannelBuffers }
+import scala.annotation.switch
 
 import io.gatling.core.util.FastByteArrayInputStream
 
@@ -50,13 +50,13 @@ object ResponseBody {
 
   val EmptyBytes = new Array[Byte](0)
 
-  private def getBytes(buffer: ChannelBuffer, start: Int, length: Int): Array[Byte] = {
+  private def getBytes(buffer: ByteBuf, start: Int, length: Int): Array[Byte] = {
     val array = new Array[Byte](length)
     buffer.getBytes(start, array)
     array
   }
 
-  def chunks2Bytes(chunks: Seq[ChannelBuffer]): Array[Byte] = (chunks.size: @switch) match {
+  def chunks2Bytes(chunks: Seq[ByteBuf]): Array[Byte] = (chunks.size: @switch) match {
 
     case 0 => EmptyBytes
 
@@ -71,17 +71,17 @@ object ResponseBody {
         getBytes(headChunk, readerIndex, readableBytes)
 
     case _ =>
-      val composite = ChannelBuffers.wrappedBuffer(chunks: _*)
+      val composite = Unpooled.wrappedBuffer(chunks: _*)
       getBytes(composite, composite.readerIndex, composite.readableBytes)
   }
 
-  def chunks2String(chunks: Seq[ChannelBuffer], charset: Charset): String = (chunks.size: @switch) match {
+  def chunks2String(chunks: Seq[ByteBuf], charset: Charset): String = (chunks.size: @switch) match {
 
     case 0 => ""
 
     case 1 => chunks.head.toString(charset)
 
-    case _ => ChannelBuffers.wrappedBuffer(chunks: _*).toString(charset)
+    case _ => Unpooled.wrappedBuffer(chunks: _*).toString(charset)
   }
 }
 
@@ -93,7 +93,7 @@ sealed trait ResponseBody {
 
 object StringResponseBody {
 
-  def apply(chunks: Seq[ChannelBuffer], charset: Charset) = {
+  def apply(chunks: Seq[ByteBuf], charset: Charset) = {
     val string = ResponseBody.chunks2String(chunks, charset)
     new StringResponseBody(string, charset)
   }
@@ -107,7 +107,7 @@ case class StringResponseBody(string: String, charset: Charset) extends Response
 
 object ByteArrayResponseBody {
 
-  def apply(chunks: Seq[ChannelBuffer], charset: Charset) = {
+  def apply(chunks: Seq[ByteBuf], charset: Charset) = {
     val bytes = ResponseBody.chunks2Bytes(chunks)
     new ByteArrayResponseBody(bytes, charset)
   }
@@ -119,7 +119,7 @@ case class ByteArrayResponseBody(bytes: Array[Byte], charset: Charset) extends R
   lazy val string = new String(bytes, charset)
 }
 
-case class InputStreamResponseBody(chunks: Seq[ChannelBuffer], charset: Charset) extends ResponseBody {
+case class InputStreamResponseBody(chunks: Seq[ByteBuf], charset: Charset) extends ResponseBody {
 
   var bytesLoaded = false
 
@@ -128,11 +128,11 @@ case class InputStreamResponseBody(chunks: Seq[ChannelBuffer], charset: Charset)
     case 0 => new FastByteArrayInputStream(ResponseBody.EmptyBytes)
 
     case 1 =>
-      new ChannelBufferInputStream(chunks.head.duplicate)
+      new ByteBufInputStream(chunks.head.duplicate)
 
     case _ =>
-      val composite = ChannelBuffers.wrappedBuffer(chunks.map(_.duplicate): _*)
-      new ChannelBufferInputStream(composite)
+      val composite = Unpooled.wrappedBuffer(chunks.map(_.duplicate): _*)
+      new ByteBufInputStream(composite)
   }
 
   lazy val bytes = {

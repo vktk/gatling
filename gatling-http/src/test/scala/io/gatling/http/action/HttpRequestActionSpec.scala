@@ -20,7 +20,7 @@ import org.mockito.Mockito._
 import org.scalatest.{ FlatSpec, Matchers }
 import org.scalatest.mock.MockitoSugar
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session._

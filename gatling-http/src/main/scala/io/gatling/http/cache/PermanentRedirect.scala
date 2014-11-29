@@ -15,12 +15,12 @@
  */
 package io.gatling.http.cache
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.{ Request, RequestBuilder }
+import org.asynchttpclient.uri.Uri
 
 import scala.annotation.tailrec
 import io.gatling.core.session.Session
 import io.gatling.http.ahc.HttpTx
-import com.ning.http.client.{ Request, RequestBuilder }
 
 object PermanentRedirect {
 

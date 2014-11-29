@@ -15,7 +15,7 @@
  */
 package io.gatling.http.action.ws
 
-import com.ning.http.client.websocket._
+import org.asynchttpclient.ws._
 
 import akka.actor.ActorRef
 import io.gatling.core.util.TimeHelper.nowMillis

@@ -15,8 +15,8 @@
  */
 package io.gatling.http.ahc
 
-import com.ning.http.client.Request
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.Request
+import org.asynchttpclient.uri.Uri
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.core.session._
 import io.gatling.http.cache.PermanentRedirect

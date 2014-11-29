@@ -18,16 +18,14 @@ package io.gatling.http.util
 import java.net.URLDecoder
 import java.nio.charset.Charset
 
-import com.ning.http.client.uri.Uri
-
 import scala.collection.breakOut
 import scala.io.Codec.UTF8
 import scala.util.Try
 
-import com.ning.http.client.{ FluentCaseInsensitiveStringsMap, Realm }
-import com.ning.http.client.Realm.AuthScheme
+import org.asynchttpclient.{ FluentCaseInsensitiveStringsMap, Realm }
+import org.asynchttpclient.Realm.AuthScheme
+import org.asynchttpclient.uri.Uri
 import com.typesafe.scalalogging.StrictLogging
-
 import io.gatling.core.session._
 import io.gatling.http.{ HeaderNames, HeaderValues }
 

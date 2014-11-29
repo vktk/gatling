@@ -18,16 +18,17 @@ package io.gatling.http.ahc
 import java.util.{ ArrayList => JArrayList }
 import java.util.concurrent.{ TimeUnit, Executors, ThreadFactory }
 
-import com.ning.http.client.providers.netty.NettyAsyncHttpProviderConfig.NettyWebSocketFactory
-import com.ning.http.client.providers.netty.ws.NettyWebSocket
-import org.jboss.netty.channel.Channel
-import org.jboss.netty.channel.socket.nio.{ NioWorkerPool, NioClientBossPool, NioClientSocketChannelFactory }
-import org.jboss.netty.logging.{ InternalLoggerFactory, Slf4JLoggerFactory }
+import io.netty.channel.Channel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.util.HashedWheelTimer
+import io.netty.util.internal.logging.{ Slf4JLoggerFactory, InternalLoggerFactory }
+import org.asynchttpclient.providers.netty4.NettyAsyncHttpProviderConfig.NettyWebSocketFactory
+import org.asynchttpclient.providers.netty4.ws.NettyWebSocket
 
-import com.ning.http.client.{ AsyncHttpClient, AsyncHttpClientConfig, Request }
-import com.ning.http.client.providers.netty.NettyAsyncHttpProviderConfig
-import com.ning.http.client.providers.netty.channel.pool.DefaultChannelPool
-import com.ning.http.client.websocket.{ WebSocketListener, WebSocketUpgradeHandler }
+import org.asynchttpclient.{ DefaultAsyncHttpClient, AsyncHttpClient, AsyncHttpClientConfig, Request }
+import org.asynchttpclient.providers.netty4.NettyAsyncHttpProviderConfig
+import org.asynchttpclient.providers.netty4.channel.pool.DefaultChannelPool
+import org.asynchttpclient.ws.{ WebSocketListener, WebSocketUpgradeHandler }
 import com.typesafe.scalalogging.StrictLogging
 
 import akka.actor.ActorRef
@@ -44,7 +45,6 @@ import io.gatling.http.response.ResponseBuilder
 import io.gatling.http.util.SSLHelper.{ RichAsyncHttpClientConfigBuilder, newKeyManagers, newTrustManagers }
 import io.gatling.http.check.ws.WsCheck
 import io.gatling.core.check.CheckResult
-import org.jboss.netty.util.HashedWheelTimer
 
 object HttpTx {
 
@@ -138,11 +138,10 @@ class HttpEngine extends AkkaDefaults with StrictLogging {
     nettyTimer)
 
   val nettyConfig = {
-    val numWorkers = configuration.http.ahc.ioThreadMultiplier * Runtime.getRuntime.availableProcessors
-    val socketChannelFactory = new NioClientSocketChannelFactory(new NioClientBossPool(nioThreadPool, 1, nettyTimer, null), new NioWorkerPool(nioThreadPool, numWorkers))
-    system.registerOnTermination(socketChannelFactory.releaseExternalResources())
+    val eventGroup = new NioEventLoopGroup
+    system.registerOnTermination(eventGroup.shutdownGracefully())
     val nettyConfig = new NettyAsyncHttpProviderConfig
-    nettyConfig.setSocketChannelFactory(socketChannelFactory)
+    nettyConfig.setEventLoopGroup(eventGroup)
     nettyConfig.setNettyTimer(nettyTimer)
     nettyConfig.setChannelPool(channelPool)
     nettyConfig.setHttpClientCodecMaxInitialLineLength(configuration.http.ahc.httpClientCodecMaxInitialLineLength)
@@ -226,7 +225,7 @@ class HttpEngine extends AkkaDefaults with StrictLogging {
 
     }.getOrElse(defaultAhcConfig)
 
-    val client = new AsyncHttpClient(ahcConfig)
+    val client = new DefaultAsyncHttpClient(ahcConfig)
     system.registerOnTermination(client.close())
     client
   }

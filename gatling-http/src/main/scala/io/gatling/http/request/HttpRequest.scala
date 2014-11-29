@@ -15,7 +15,7 @@
  */
 package io.gatling.http.request
 
-import com.ning.http.client.{ RequestBuilder, SignatureCalculator, Request }
+import org.asynchttpclient.{ RequestBuilder, SignatureCalculator, Request }
 
 import io.gatling.core.session._
 import io.gatling.core.validation._

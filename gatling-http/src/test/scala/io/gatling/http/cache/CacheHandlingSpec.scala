@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets._
 import org.scalatest.{ FlatSpec, Matchers }
 import org.scalatest.mock.MockitoSugar
 
-import com.ning.http.client.{ FluentCaseInsensitiveStringsMap, HttpResponseStatus, RequestBuilder }
+import org.asynchttpclient.{ FluentCaseInsensitiveStringsMap, HttpResponseStatus, RequestBuilder }
 
 import io.gatling.core.config.GatlingConfiguration
 import io.gatling.http.{ HeaderNames, HeaderValues }

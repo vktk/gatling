@@ -17,9 +17,14 @@ package io.gatling.recorder.scenario
 
 import java.nio.charset.Charset
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
+import org.asynchttpclient.util.Base64
+
 import io.gatling.http.HeaderNames._
 import io.gatling.http.HeaderValues._
+import io.gatling.http.fetch.{ EmbeddedResource, HtmlParser }
+import io.gatling.http.util.HttpHelper.parseFormBody
+import io.gatling.recorder.config.RecorderConfiguration
 
 import scala.collection.breakOut
 import scala.collection.JavaConversions.asScalaBuffer
@@ -27,12 +32,6 @@ import scala.concurrent.duration.FiniteDuration
 import scala.io.Codec.UTF8
 
 import org.jboss.netty.handler.codec.http.{ HttpMessage, HttpRequest, HttpResponse }
-
-import com.ning.http.util.Base64
-
-import io.gatling.http.fetch.{ EmbeddedResource, HtmlParser }
-import io.gatling.http.util.HttpHelper.parseFormBody
-import io.gatling.recorder.config.RecorderConfiguration
 
 case class TimedScenarioElement[+T <: ScenarioElement](sendTime: Long, arrivalTime: Long, element: T)
 

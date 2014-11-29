@@ -18,7 +18,7 @@ package io.gatling.http.request
 import java.io.File
 import java.nio.charset.Charset
 
-import com.ning.http.client.multipart.{ ByteArrayPart, FilePart, Part, PartBase, StringPart }
+import org.asynchttpclient.multipart.{ ByteArrayPart, FilePart, Part, PartBase, StringPart }
 
 import io.gatling.core.config.GatlingConfiguration.configuration
 import io.gatling.core.session._

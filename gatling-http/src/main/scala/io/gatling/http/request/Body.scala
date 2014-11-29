@@ -21,8 +21,8 @@ import io.gatling.core.session.el.ELCompiler
 
 import scala.collection.JavaConverters._
 
-import com.ning.http.client.RequestBuilder
-import com.ning.http.client.generators.InputStreamBodyGenerator
+import org.asynchttpclient.RequestBuilder
+import org.asynchttpclient.generators.InputStreamBodyGenerator
 
 import io.gatling.core.config.GatlingConfiguration.configuration
 import io.gatling.core.session.{ Expression, Session }

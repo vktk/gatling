@@ -1,6 +1,6 @@
 package io.gatling.http.request.builder
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import io.gatling.core.session.Expression
 
 /**

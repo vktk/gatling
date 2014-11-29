@@ -17,16 +17,15 @@ package io.gatling.http.response
 
 import java.security.MessageDigest
 
-import com.ning.http.client.providers.netty.request.NettyRequest
+import io.netty.buffer.ByteBuf
+import org.asynchttpclient.providers.netty4.request.NettyRequest
 import io.gatling.http.util.HttpHelper
 
 import scala.collection.mutable.ArrayBuffer
 import scala.math.max
 
-import org.jboss.netty.buffer.ChannelBuffer
-
-import com.ning.http.client.{ FluentCaseInsensitiveStringsMap, HttpResponseBodyPart, HttpResponseHeaders, HttpResponseStatus, Request }
-import com.ning.http.client.providers.netty.response.NettyResponseBodyPart
+import org.asynchttpclient.{ FluentCaseInsensitiveStringsMap, HttpResponseBodyPart, HttpResponseHeaders, HttpResponseStatus, Request }
+import org.asynchttpclient.providers.netty4.response.LazyNettyResponseBodyPart
 import com.typesafe.scalalogging.StrictLogging
 
 import io.gatling.core.config.GatlingConfiguration.configuration
@@ -77,7 +76,7 @@ class ResponseBuilder(request: Request,
   var lastByteReceived = 0L
   private var status: Option[HttpResponseStatus] = None
   private var headers: FluentCaseInsensitiveStringsMap = ResponseBuilder.EmptyHeaders
-  private val chunks = new ArrayBuffer[ChannelBuffer]
+  private val chunks = new ArrayBuffer[ByteBuf]
   private var digests: Map[String, MessageDigest] = initDigests()
   private var nettyRequest: Option[NettyRequest] = None
 
@@ -127,10 +126,10 @@ class ResponseBuilder(request: Request,
 
     updateLastByteReceived()
 
-    val channelBuffer = bodyPart.asInstanceOf[NettyResponseBodyPart].getChannelBuffer
+    val byteBuf = bodyPart.asInstanceOf[LazyNettyResponseBodyPart].getBuf
 
     if (storeBodyParts || storeHtmlOrCss)
-      chunks += channelBuffer
+      chunks += byteBuf
 
     if (computeChecksums)
       digests.values.foreach(_.update(bodyPart.getBodyByteBuffer))

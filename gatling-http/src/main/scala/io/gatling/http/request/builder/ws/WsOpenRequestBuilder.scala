@@ -15,7 +15,7 @@
  */
 package io.gatling.http.request.builder.ws
 
-import com.ning.http.client.Request
+import org.asynchttpclient.Request
 import io.gatling.core.session.Expression
 import io.gatling.http.action.ws.WsOpenActionBuilder
 import io.gatling.http.config.HttpProtocol

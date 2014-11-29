@@ -19,7 +19,7 @@ import java.io.IOException
 import java.net.InetSocketAddress
 import javax.net.ssl.SSLException
 
-import com.ning.http.client.uri.Uri
+import org.asynchttpclient.uri.Uri
 import com.typesafe.scalalogging.StrictLogging
 import io.gatling.recorder.http.HttpProxy
 import io.gatling.recorder.http.channel.BootstrapFactory._

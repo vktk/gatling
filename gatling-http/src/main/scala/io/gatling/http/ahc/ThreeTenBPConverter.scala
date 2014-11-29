@@ -15,7 +15,7 @@
  */
 package io.gatling.http.ahc
 
-import com.ning.http.client.date.{ RFC2616Date, TimeConverter }
+import org.asynchttpclient.date.{ RFC2616Date, TimeConverter }
 import org.threeten.bp.{ ZonedDateTime, ZoneId }
 
 object ThreeTenBPConverter extends TimeConverter {

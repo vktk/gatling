@@ -15,7 +15,7 @@
  */
 package io.gatling.http.action.ws
 
-import com.ning.http.client.Request
+import org.asynchttpclient.Request
 
 import akka.actor.ActorDSL.actor
 import akka.actor.ActorRef

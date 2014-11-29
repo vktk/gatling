@@ -17,7 +17,7 @@ package io.gatling.recorder.har
 
 import java.nio.charset.StandardCharsets
 
-import com.ning.http.util.Base64
+import org.asynchttpclient.util.Base64
 
 import org.threeten.bp.ZonedDateTime
 
