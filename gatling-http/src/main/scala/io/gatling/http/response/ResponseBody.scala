@@ -119,6 +119,7 @@ case class ByteArrayResponseBody(bytes: Array[Byte], charset: Charset) extends R
   lazy val string = new String(bytes, charset)
 }
 
+// FIXME change into Seq[Byte] or remove?
 case class InputStreamResponseBody(chunks: Seq[ByteBuf], charset: Charset) extends ResponseBody {
 
   var bytesLoaded = false

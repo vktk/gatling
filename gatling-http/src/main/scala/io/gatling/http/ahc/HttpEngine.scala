@@ -22,13 +22,13 @@ import io.netty.channel.Channel
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.util.HashedWheelTimer
 import io.netty.util.internal.logging.{ Slf4JLoggerFactory, InternalLoggerFactory }
-import org.asynchttpclient.providers.netty4.NettyAsyncHttpProviderConfig.NettyWebSocketFactory
-import org.asynchttpclient.providers.netty4.ws.NettyWebSocket
 
 import org.asynchttpclient.{ DefaultAsyncHttpClient, AsyncHttpClient, AsyncHttpClientConfig, Request }
 import org.asynchttpclient.providers.netty4.NettyAsyncHttpProviderConfig
 import org.asynchttpclient.providers.netty4.channel.pool.DefaultChannelPool
 import org.asynchttpclient.ws.{ WebSocketListener, WebSocketUpgradeHandler }
+import org.asynchttpclient.providers.netty4.ws.NettyWebSocket
+import org.asynchttpclient.providers.netty4.NettyAsyncHttpProviderConfig.{ LazyResponseBodyPartFactory, NettyWebSocketFactory }
 import com.typesafe.scalalogging.StrictLogging
 
 import akka.actor.ActorRef
@@ -153,6 +153,7 @@ class HttpEngine extends AkkaDefaults with StrictLogging {
     })
     nettyConfig.setKeepEncodingHeader(configuration.http.ahc.keepEncodingHeader)
     nettyConfig.setWebSocketMaxFrameSize(configuration.http.ahc.webSocketMaxFrameSize)
+    nettyConfig.setBodyPartFactory(new LazyResponseBodyPartFactory)
     nettyConfig
   }
 

@@ -128,8 +128,11 @@ class ResponseBuilder(request: Request,
 
     val byteBuf = bodyPart.asInstanceOf[LazyNettyResponseBodyPart].getBuf
 
-    if (storeBodyParts || storeHtmlOrCss)
+    if (storeBodyParts || storeHtmlOrCss) {
+      // important: retain
+      byteBuf.retain()
       chunks += byteBuf
+    }
 
     if (computeChecksums)
       digests.values.foreach(_.update(bodyPart.getBodyByteBuffer))
@@ -184,4 +187,6 @@ class ResponseBuilder(request: Request,
       case Some(processor) => processor.applyOrElse(rawResponse, ResponseBuilder.Identity)
     }
   }
+
+  def release(): Unit = chunks.foreach(_.release)
 }

@@ -95,6 +95,7 @@ class AsyncHandler(tx: HttpTx) extends ProgressAsyncHandler[Unit] with AsyncHand
     if (done.compareAndSet(false, true)) {
       try {
         val response = responseBuilder.build
+        responseBuilder.release()
         AsyncHandlerActor.instance ! OnCompleted(tx, response)
       } catch {
         case e: Exception => sendOnThrowable(e)
@@ -105,6 +106,7 @@ class AsyncHandler(tx: HttpTx) extends ProgressAsyncHandler[Unit] with AsyncHand
     if (done.compareAndSet(false, true)) {
       responseBuilder.updateLastByteReceived()
       sendOnThrowable(throwable)
+      responseBuilder.release()
     }
 
   def sendOnThrowable(throwable: Throwable): Unit = {
